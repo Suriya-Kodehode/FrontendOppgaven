@@ -1,0 +1,75 @@
+.registerPage {
+  max-width: 400px;
+  margin: 40px auto;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+}
+
+.title {
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.form > div {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.form label {
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+}
+
+.form input {
+  padding: 0.5rem 0.75rem;
+  border: var(--input-border);
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border 0.2s;
+}
+
+.form input:focus {
+  border-color: var(--input-border-focus);
+  outline: none;
+}
+
+.form button {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background: var(--button-bg);
+  color: var(--button-text);
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.form button:hover {
+  background: var(--button-bg-hover);
+}
+
+/* ----------- */
+/* Bottom text */
+/* ----------- */
+.loginLink {
+  margin-top: 1rem;
+  text-align: center;
+}
+.loginLink a {
+  color: var(--link-color);
+  text-decoration: underline;
+  text-decoration: none;
+  font-weight: 500;
+}
+.loginLink a:hover {
+  color: var(--link-hover-color);
+}

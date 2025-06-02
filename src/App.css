@@ -3,3 +3,38 @@
   padding: 0;
   text-align: center;
 }
+
+.app {
+  width: 100dvw;
+  min-height: 100dvh;
+  display: grid;
+  grid-template-areas: 
+  "header header header"
+  "aside main main"
+  "aside footer footer";
+  grid-template-rows: auto 1fr auto;
+  grid-template-columns: auto 1fr auto;
+}
+
+.app > header {
+  grid-area: header;
+}
+.app > aside {
+  grid-area: aside;
+}
+.app > main {
+  grid-area: main;
+}
+.app > footer {
+  grid-area: footer;
+}
+
+.register {
+  background: var(--bg1);
+}
+.login {
+  background: inherit;
+}
+.home {
+  background: inherit;
+}
