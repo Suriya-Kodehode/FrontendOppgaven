@@ -2,6 +2,7 @@
     height: auto;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     position: relative;
     padding: 1rem 1.5rem;
     margin-bottom: 0.8rem;
@@ -15,17 +16,17 @@
 
 /* Logo link styles */
 .logo a {
-    font-weight: 600;
-    color: var(--text-color);
-    text-decoration: none;
-    transition: color 0.2s;
-}
-.logo a:focus {
     outline: none;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+.logo img {
+    width: auto;
+    height: 3.125rem;
 }
 
 .navLinks {
-    font-size: large;
     position: absolute;
     display: flex;
     gap: 1rem;
@@ -47,21 +48,23 @@
     height: 100%;
 }
 .navLinks a:hover {
-    color: #fff;
+    color: var(--text-color-inverted);
     background: #646cff;
 }
+.navLink a > h3 {
+    font-size: larger;
+}
 
-/* Active nav link underline */
+/* Active nav link styles */
 .active,
-.navLinks a.active p {
+.navLinks a.active h3 {
     text-decoration: underline;
     text-underline-offset: 4px;
     text-decoration-thickness: 2px;
     color: #0078d7;
 }
-/* Active nav link styles */
-a.active p:hover {
-    color: #fff;
+.navLink:hover > a.active h3 {
+    color: var(--text-color-inverted);
     text-decoration: underline;
 }
 
@@ -86,4 +89,77 @@ a.active p:hover {
     box-shadow: 0 0 0 4px #DCBAB5;  
     background: #f5efeed8;       
     transform: scale(1.08);
+}
+
+/* ----------- */
+/* Mobile mode */
+/* ----------- */
+.menuButton {
+    display: none;
+    background: none;
+    border: none;
+    font-size: normal;
+    cursor: pointer;
+}
+.menuIcon {
+    display: block;
+}
+
+@media (max-width: 768px) {
+    .header {
+        position: relative;
+    }
+    .logo img {
+        width: auto;
+        height: 2.1875rem;
+    }
+    .menuButton {
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    .menuButton:focus {
+        outline: none;
+    }
+    .navLinks {
+        width: fit-content;
+        display: none;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        background: transparent;
+        flex-direction: row;
+        z-index: 2;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        gap: 1rem;
+        padding: 0;
+        border-radius: 8px;
+    }
+    .navLinks.open {
+        display: flex;
+    }
+    .navLink {
+        width: 100%;
+        background-color: #fffefede;
+        border-radius: 6px;
+    }
+    .navLink a {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0.5rem 1rem;
+        text-align: center;
+    }
+    .navLink h3 {
+        text-align: center;
+        font-size: 1rem;
+        font-weight: 500;
+        white-space: nowrap;
+    }
 }

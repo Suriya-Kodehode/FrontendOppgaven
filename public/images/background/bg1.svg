@@ -1,23 +1,25 @@
-<svg width="2560" height="1024" viewBox="0 0 2560 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect width="2560" height="1024" fill="url(#paint0_linear_119_22)"/>
+<svg width="1980" height="1024" viewBox="0 0 1980 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_119_22)">
+<rect width="1980" height="1024" fill="url(#paint0_linear_119_22)"/>
 <circle cx="594" cy="829" r="18" fill="#EBB2B2"/>
 <circle cx="1141" cy="774" r="18" fill="#EBB2B2"/>
 <circle cx="1431" cy="458" r="18" fill="#EBB2B2"/>
-<circle cx="2154" cy="530" r="18" fill="#EBB2B2"/>
 <circle cx="91" cy="914" r="18" fill="#EBB2B2"/>
 <circle cx="1246" cy="181" r="18" fill="#E29090"/>
 <circle cx="283" cy="494" r="18" fill="#E29090"/>
-<circle cx="2268" cy="865" r="18" fill="#E29090"/>
 <rect x="1817.35" y="266.335" width="40" height="40" transform="rotate(25.1752 1817.35 266.335)" fill="#DEB5A3" stroke="#EBA645"/>
 <rect x="240.453" y="131.335" width="47.2945" height="47.2945" transform="rotate(25.1752 240.453 131.335)" fill="#EEC5C0" stroke="#D7B17D"/>
 <rect x="790.748" y="330.379" width="47.2945" height="47.2945" transform="rotate(73.5944 790.748 330.379)" fill="#EEC5C0" stroke="#D7B17D"/>
-<rect x="2241.32" y="116.068" width="40" height="40" transform="rotate(-27.9434 2241.32 116.068)" fill="#DEB5A3" stroke="#EBA645"/>
 <rect x="1678.11" y="773.299" width="40" height="40" transform="rotate(52.69 1678.11 773.299)" fill="#DEB5A3" stroke="#EBA645"/>
+</g>
 <defs>
-<linearGradient id="paint0_linear_119_22" x1="-2.94232e-05" y1="0.058684" x2="1483.64" y2="1875.46" gradientUnits="userSpaceOnUse">
+<linearGradient id="paint0_linear_119_22" x1="-2.2757e-05" y1="0.058684" x2="1524.17" y2="1490.19" gradientUnits="userSpaceOnUse">
 <stop stop-color="#EAC3C3"/>
 <stop offset="0.528846" stop-color="#DBBAB4"/>
 <stop offset="1" stop-color="#E69A7E"/>
 </linearGradient>
+<clipPath id="clip0_119_22">
+<rect width="1980" height="1024" fill="white"/>
+</clipPath>
 </defs>
 </svg>

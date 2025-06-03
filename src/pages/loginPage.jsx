@@ -1,39 +1,37 @@
 import styles from "../CSSModules/loginpage.module.css";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import AuthForm from "../components/AuthForm";
+import { USE_DEMO_AUTH, handleLogin as handleLoginDemo } from "../utility/forTesting";
 
 const LoginPage = () => {
     const { t } = useTranslation();
+    const navigate = useNavigate();
+
+    const handleLogin = USE_DEMO_AUTH
+        ? (e) => handleLoginDemo(e, navigate)
+        : (e) => {
+            e.preventDefault();
+            
+        };
+
+    const fields = [
+        { id: "username", name: "username", type: "text", label: "Username", placeholder: "Enter your username", autoComplete: "username" },
+        { id: "password", name: "password", type: "password", label: "Password", placeholder: "Enter your password", autoComplete: "current-password" }
+    ];
 
     return (
         <div className={styles.loginPage}>
             <h1 className={styles.title}>{t("Login")}</h1>
-            <form className={styles.form}>
-                <div>
-                    <label htmlFor="username">{t("Username")}:</label>
-                    <input
-                        type="text"
-                        id="username"
-                        name="username"
-                        required
-                        placeholder={t("Enter your username")}
-                    />
-                </div>
-                <div>
-                    <label htmlFor="password">{t("Password")}:</label>
-                    <input
-                        type="password"
-                        id="password"
-                        name="password"
-                        required
-                        placeholder={t("Enter your password")}
-                    />
-                </div>
-                <button type="submit">{t("Login")}</button>
-            </form>
-            <div className={styles.registerLink}>
-                {t("Don't have an account?")} <Link to="/register">{t("Register")}</Link>
-            </div>
+            <AuthForm
+                onSubmit={handleLogin}
+                t={t}
+                fields={fields}
+                buttonLabel="Login"
+                linkText="Don't have an account?"
+                linkTo="/register"
+                linkLabel="Register"
+            />
         </div>
     );
 };

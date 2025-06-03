@@ -1,33 +1,40 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import styles from "../CSSModules/registerpage.module.css";
+import AuthForm from "../components/AuthForm";
+import { USE_DEMO_AUTH, handleRegister as handleRegisterDemo } from "../utility/forTesting";
 
 const RegisterPage = () => {
     const { t } = useTranslation();
+    const navigate = useNavigate();
+
+    const handleRegister = USE_DEMO_AUTH
+        ? (e) => handleRegisterDemo(e, navigate)
+        : (e) => {
+            e.preventDefault();
+            
+        };
+
+    const fields = [
+        { id: "username", name: "username", type: "text", label: "Username", placeholder: "Enter your username", autoComplete: "username" },
+        { id: "email", name: "email", type: "email", label: "Email", placeholder: "Enter your email", autoComplete: "email" },
+        { id: "password", name: "password", type: "password", label: "Password", placeholder: "Enter your password", autoComplete: "new-password" }
+    ];
+
     return (
-        <>
-            <div className={styles.registerPage}>
-                <h1 className={styles.title}>{t("Register")}</h1>
-                <form className={styles.form}>
-                    <div>
-                        <label htmlFor="username">{t("Username")}:</label>
-                        <input type="text" id="username" name="username" required placeholder={t("Enter your username")}/>
-                    </div>
-                    <div>
-                        <label htmlFor="email">{t("Email")}:</label>
-                        <input type="email" id="email" name="email" required placeholder={t("Enter your email")}/>
-                    </div>
-                    <div>
-                        <label htmlFor="password">{t("Password")}:</label>
-                        <input type="password" id="password" name="password" required placeholder={t("Enter your password")}/>
-                    </div>
-                    <button type="submit">{t("Register")}</button>
-                </form>
-                <div className={styles.loginLink}>
-                    {t("Already have an account?")} <Link to="/login">{t("Login")}</Link>
-                </div>
-            </div>
-        </>
-    )
-}
+        <div className={styles.registerPage}>
+            <h1 className={styles.title}>{t("Register")}</h1>
+            <AuthForm
+                onSubmit={handleRegister}
+                t={t}
+                fields={fields}
+                buttonLabel="Register"
+                linkText="Already have an account?"
+                linkTo="/login"
+                linkLabel="Login"
+            />
+        </div>
+    );
+};
+
 export default RegisterPage;

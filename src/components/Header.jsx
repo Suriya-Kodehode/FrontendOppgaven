@@ -1,16 +1,50 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import styles from "../CSSModules/componentCSS/header.module.css";
-import { getFilePath } from "../assets/FileManager";
+import { getFilePaths } from "../assets/FileManager.jsx";
+import { useCloseOnOutsideClick } from "./functions/hooks.jsx";
+import { isAuthenticated } from "../utility/forTesting.jsx";
 
-const enFlag = getFilePath("icons", "flag-uk.svg");
-const noFlag = getFilePath("icons", "flag-norway.svg");
+// Logo component
+const Logo = ({ src, alt, isAuthenticated }) => (
+    isAuthenticated ? (
+        <Link to="/home">
+            <img src={src} alt={alt} />
+        </Link>
+    ) : (
+        <Link to="/register">
+            <img src={src} alt={alt} />
+        </Link>
+    )
+);
+
+// LanguageOptions component
+const LanguageOptions = ({ lang, changeLanguage, languages }) => (
+    <div className={styles.languageOptions}>
+        {languages.map(({ code, flag, alt, ariaLabel }) => (
+            <img
+                key={code}
+                src={flag}
+                alt={alt}
+                width={28}
+                height={28}
+                className={lang === code ? styles.activeLang : ""}
+                style={{ cursor: "pointer" }}
+                onClick={() => changeLanguage(code)}
+                tabIndex={0}
+                aria-label={ariaLabel}
+            />
+        ))}
+    </div>
+);
 
 const Header = () => {
     const { t, i18n } = useTranslation();
     const [lang, setLang] = useState(i18n.language || "en");
+    const [menuOpen, setMenuOpen] = useState(false);
     const location = useLocation();
+    const menuRef = useRef(null);
 
     const navLinks = [
         { to: "/register", key: "Register" },
@@ -24,44 +58,42 @@ const Header = () => {
         setLang(lng);
     };
 
+    // Get file paths for icons and logo
+    const [enFlag, noFlag] = getFilePaths("icons", ["flag-uk.svg", "flag-norway.svg"]);
+    const [logoSample] = getFilePaths("logo", ["logoExample.svg"]);
+
+    // Languages array for LanguageOptions
+    const languages = [
+        { code: "en", flag: enFlag, alt: "English", ariaLabel: "Switch to English" },
+        { code: "no", flag: noFlag, alt: "Norsk", ariaLabel: "Bytt til norsk" }
+    ];
+
+    useCloseOnOutsideClick(menuRef, () => setMenuOpen(false), menuOpen);
+
     return (
         <div className={styles.header}>
             <div className={styles.logo}>
-                <Link to="/home">{t("MyWebsite")}</Link>
+                <Logo src={logoSample} alt="Logo Example" isAuthenticated={isAuthenticated()} />
             </div>
-            <div className={styles.navLinks}>
-                {navLinks.map(link => (
-                    <div key={link.to}>
-                        <Link to={link.to} className={isActive(link.to) ? styles.active : ""}>
-                            <p>{t(link.key)}</p>
-                        </Link>
-                    </div>
-                ))}
+            <div ref={menuRef}>
+                <button className={styles.menuButton} onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle navigation">
+                    <span className={styles.menuIcon}>&#9776;</span>
+                </button>
+                <div className={`${styles.navLinks} ${menuOpen ? styles.open : ""}`}>
+                    {navLinks.map(link => (
+                        <div key={link.to} className={styles.navLink}>
+                            <Link to={link.to} className={isActive(link.to) ? styles.active : ""} onClick={() => setMenuOpen(false)}>
+                                <h3>{t(link.key)}</h3>
+                            </Link>
+                        </div>
+                    ))}
+                </div>
             </div>
-            <div className={styles.languageOptions}>
-                <img
-                    src={enFlag}
-                    alt="English"
-                    width={28}
-                    height={28}
-                    className={lang === "en" ? styles.activeLang : ""}
-                    style={{ cursor: "pointer" }}
-                    onClick={() => changeLanguage("en")}
-                    tabIndex={0}
-                    aria-label="Switch to English"
-                />
-                <img
-                    src={noFlag}
-                    alt="Norsk"
-                    width={28}
-                    height={28}
-                    className={lang === "no" ? styles.activeLang : ""}
-                    style={{ cursor: "pointer" }}
-                    onClick={() => changeLanguage("no")}
-                    tabIndex={0}
-                    aria-label="Bytt til norsk"
-                />
-            </div>
+            <LanguageOptions
+                lang={lang}
+                changeLanguage={changeLanguage}
+                languages={languages}
+            />
         </div>
     );
 };

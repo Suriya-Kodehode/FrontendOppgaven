@@ -1,12 +1,13 @@
 import { createBrowserRouter, RouterProvider, Navigate } from "react-router-dom";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { base_url as base } from "../../config.js";
+import PrivateRoute from "./privateRoute.jsx";
 
-import App         from "../App.jsx";
-import Home        from "../pages/homePage.jsx";
-import Register    from "../pages/registerPage.jsx";
-import Login       from "../pages/loginPage.jsx";
-import NotFound    from "../pages/notfound.jsx";
+import App from "../App.jsx";
+import Home from "../pages/homePage.jsx";
+import Register from "../pages/registerPage.jsx";
+import Login from "../pages/loginPage.jsx";
+import NotFound from "../pages/notfound.jsx";
 
 const router = createBrowserRouter(
   [
@@ -29,7 +30,11 @@ const router = createBrowserRouter(
         },
         { 
             path: "home",     
-            element: <Home /> 
+            element: (
+                <PrivateRoute>
+                    <Home />
+                </PrivateRoute>
+            )
         },
       ]
     },

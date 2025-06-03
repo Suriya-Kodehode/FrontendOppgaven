@@ -29,12 +29,18 @@
   grid-area: footer;
 }
 
+.register,.login,.home {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
 .register {
   background: var(--bg1);
 }
 .login {
-  background: inherit;
+  background: var(--bg2);
 }
 .home {
-  background: inherit;
+  background: var(--bg3);
 }

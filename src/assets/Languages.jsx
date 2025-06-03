@@ -6,6 +6,7 @@ const translations = {
         translation: {
             Register: "Register",
             Login: "Login",
+            Logout: "Logout",
             Home: "Home",
             Username: "Username",
             Email: "Email",
@@ -24,6 +25,7 @@ const translations = {
         translation: {
             Register: "Registrer",
             Login: "Logg inn",
+            Logout: "Logg ut",
             Home: "Hjem",
             Username: "Brukernavn",
             Email: "E-post",
@@ -50,4 +52,5 @@ i18n
             escapeValue: false
         }
     });
+    
 export default i18n;

@@ -16,22 +16,26 @@
   /* ----------------------- */
   /* background-images */
   --bg1: url("/images/background/bg1.svg");
+  --bg2: url("/images/background/bg2.svg");
+  --bg3: url("/images/background/bg3.svg");
 
   /* general */
   --text-color: #242424;
   --background-color: #f5f5f5;
+  --text-color-inverted: #fff;
 
   /* link */
-  --link-color: #646cff;
-  --link-hover-color: #8a8ed8;
+  --link-color: #3b82f6;
+  --link-hover-color: #2563eb;
 
   /* button colors */
   --button-bg: #0078D7;
   --button-text: #fff;
   --button-bg-hover: #005fa3;
+
   /* input */
   --input-border: 1px solid #bbb;
-  --input-focus-border: #0078d7;
+  --input-focus-border: 2px solid #0078d7;
 }
 * {
   box-sizing: border-box;

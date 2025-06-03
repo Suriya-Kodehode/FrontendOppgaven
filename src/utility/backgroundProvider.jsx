@@ -4,13 +4,12 @@ import { useLocation } from 'react-router-dom';
 const BackgroundContext = createContext();
 export const useBackground = () => useContext(BackgroundContext);
 
-// Use array and endsWith for robust matching
 const backgroundMapping = [
     { path: "/register", className: "register" },
     { path: "/login",    className: "login" },
     { path: "/home",     className: "home" }
 ];
-const defaultBackground = { className: "", color: "var(--text-color)", background: "var(--background-color)" };
+const defaultBackground = { className: "", color: "var(--text-color)", background: "var(--bg3)" };
 
 const BackgroundProvider = ({ children }) => {
     const location = useLocation();

@@ -1,0 +1,45 @@
+.homePage {
+  max-width: 600px;
+  margin: 3rem auto;
+  padding: 2.5rem 2rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: #2563eb;
+  text-align: center;
+}
+
+.description {
+  font-size: 1.2rem;
+  color: #333;
+  margin-bottom: 2.5rem;
+  text-align: center;
+}
+
+.logoutButton {
+  margin-top: 1rem;
+  padding: 0.75rem 2rem;
+  border-radius: 8px;
+  border: none;
+  background: var(--button-bg);
+  color: var(--button-text);
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.logoutButton:hover,
+.logoutButton:focus {
+  background: var(--button-bg-hover);
+  color: var(--button-text);
+}
