@@ -12,16 +12,17 @@
     box-sizing: border-box;
     transform: scale(1);
 }
-
+.languageOptions img:hover {
+  border: 1px solid #0078d4;
+}
 .languageOptions img:hover,
 .languageOptions img:focus {
-    border: 1px solid #0078d4;
     outline: none;
     transform: scale(1.1);
 }
 
 .activeLang {
-    transform: scale(1.2);
+    scale: 1.2;
 }
 
 /* Logout button */

@@ -1,7 +1,7 @@
 import { createBrowserRouter, RouterProvider, Navigate } from "react-router-dom";
 import { useEffect } from "react";
 import { base_url as base } from "../../config.js";
-import { PrivateRoute } from "./authRoute.jsx";
+import { PrivateRoute, RedirectAuth } from "./authRoute.jsx";
 
 import App from "../App.jsx";
 import Home from "../pages/homePage.jsx";
@@ -22,11 +22,19 @@ const router = createBrowserRouter(
         },
         { 
             path: "register", 
-            element: <Register /> 
+            element: (
+              <RedirectAuth>
+                <Register />
+              </RedirectAuth>
+            )
         },
         { 
             path: "login",    
-            element: <Login /> 
+            element: (
+              <RedirectAuth>
+                <Login />
+              </RedirectAuth>
+            )
         },
         { 
             path: "home",     
