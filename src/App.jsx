@@ -6,7 +6,6 @@ import BackgroundProvider from './utility/backgroundProvider.jsx'
 import "./assets/Languages.jsx";
 import './App.css'
 
-
 function App() {
   const location = useLocation();
   const { t } = useTranslation();

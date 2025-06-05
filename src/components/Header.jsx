@@ -4,51 +4,23 @@ import { useTranslation } from "react-i18next";
 import styles from "../CSSModules/componentCSS/header.module.css";
 import { getFilePaths } from "../assets/FileManager.jsx";
 import { useCloseOnOutsideClick } from "./functions/hooks.jsx";
-import { isAuthenticated } from "../utility/forTesting.jsx";
-
-// Logo component
-const Logo = ({ src, alt, isAuthenticated }) => (
-    isAuthenticated ? (
-        <Link to="/home">
-            <img src={src} alt={alt} />
-        </Link>
-    ) : (
-        <Link to="/register">
-            <img src={src} alt={alt} />
-        </Link>
-    )
-);
-
-// LanguageOptions component
-const LanguageOptions = ({ lang, changeLanguage, languages }) => (
-    <div className={styles.languageOptions}>
-        {languages.map(({ code, flag, alt, ariaLabel }) => (
-            <img
-                key={code}
-                src={flag}
-                alt={alt}
-                width={28}
-                height={28}
-                className={lang === code ? styles.activeLang : ""}
-                style={{ cursor: "pointer" }}
-                onClick={() => changeLanguage(code)}
-                tabIndex={0}
-                aria-label={ariaLabel}
-            />
-        ))}
-    </div>
-);
+import { isAuthenticated } from "../utility/authRoute.jsx";
+import { Logo, LanguageOptions, LogoutButton } from "./subComponents.jsx";
+import { ProfileIcon } from "../assets/svgFiles.jsx";
 
 const Header = () => {
     const { t, i18n } = useTranslation();
     const [lang, setLang] = useState(i18n.language || "en");
     const [menuOpen, setMenuOpen] = useState(false);
+    const [profileMenuOpen, setProfileMenuOpen] = useState(false);
+    const [profileMenuHover, setProfileMenuHover] = useState(false);
     const location = useLocation();
     const menuRef = useRef(null);
+    const profileRef = useRef(null);
 
     const navLinks = [
         { to: "/register", key: "Register" },
-        { to: "/login", key: "Login" },
+        // { to: "/login", key: "Login" },
         { to: "/home", key: "Home" }
     ];
     const isActive = (path) => location.pathname.endsWith(path);
@@ -70,10 +42,23 @@ const Header = () => {
 
     useCloseOnOutsideClick(menuRef, () => setMenuOpen(false), menuOpen);
 
+    // Only close profile menu if not hovering over icon or dropdown
+    useCloseOnOutsideClick(profileRef, () => {
+        if (!profileMenuHover) setProfileMenuOpen(false);
+    }, profileMenuOpen);
+
+    // Only show dropdown if it was opened by click, and keep open while hovering
+    const isDropdownOpen = profileMenuOpen || profileMenuHover;
+
     return (
         <div className={styles.header}>
-            <div className={styles.logo}>
-                <Logo src={logoSample} alt="Logo Example" isAuthenticated={isAuthenticated()} />
+            <div className={styles.leftSection}>
+                <div className={styles.logo}>
+                    <Logo src={logoSample} alt="Logo Example" isAuthenticated={isAuthenticated()} />
+                </div>
+                <div className={styles.languageSelector}>
+                    <LanguageOptions lang={lang} changeLanguage={changeLanguage} languages={languages}/>
+                </div>
             </div>
             <div ref={menuRef}>
                 <button className={styles.menuButton} onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle navigation">
@@ -89,11 +74,43 @@ const Header = () => {
                     ))}
                 </div>
             </div>
-            <LanguageOptions
-                lang={lang}
-                changeLanguage={changeLanguage}
-                languages={languages}
-            />
+            <div className={styles.rightSection}>
+                <div
+                    className={styles.profileIcon}
+                    ref={profileRef}
+                    onClick={() => setProfileMenuOpen(true)}
+                    onMouseEnter={() => {
+                        if (profileMenuOpen) setProfileMenuHover(true);
+                    }}
+                    onMouseLeave={() => setProfileMenuHover(false)}
+                >
+                    <ProfileIcon
+                        style={{ cursor: "pointer" }}
+                        tabIndex={0}
+                        aria-label="Profile menu"
+                    />
+                    {isDropdownOpen && (
+                        <div
+                            className={styles.profileDropdown}
+                            onMouseEnter={() => setProfileMenuHover(true)}
+                            onMouseLeave={() => {
+                                setProfileMenuHover(false);
+                                setProfileMenuOpen(false);
+                            }}
+                        >
+                            {!isAuthenticated() ? (
+                                <Link to="/login" className={styles.profileDropdownBtn} onClick={() => setProfileMenuOpen(false)}>
+                                    {t("Login")}
+                                </Link>
+                            ) : (
+                                <LogoutButton className={styles.profileDropdownBtn}>
+                                    {t("Logout")}
+                                </LogoutButton>
+                            )}
+                        </div>
+                    )}
+                </div>
+            </div>
         </div>
     );
 };

@@ -1,0 +1,45 @@
+/* Language Selector */
+.languageOptions {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.languageOptions img {
+    border-radius: 50%;
+    border: 2px solid transparent;
+    transition: border-color 0.2s transform 0.2s;
+    box-sizing: border-box;
+    transform: scale(1);
+}
+
+.languageOptions img:hover,
+.languageOptions img:focus {
+    border: 1px solid #0078d4;
+    outline: none;
+    transform: scale(1.1);
+}
+
+.activeLang {
+    transform: scale(1.2);
+}
+
+/* Logout button */
+.logoutButton {
+  margin-top: 1rem;
+  padding: 0.75rem 2rem;
+  border-radius: 8px;
+  border: none;
+  background: var(--button-bg);
+  color: var(--button-text);
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.logoutButton:hover,
+.logoutButton:focus {
+  background: var(--button-bg-hover);
+  color: var(--button-text);
+}

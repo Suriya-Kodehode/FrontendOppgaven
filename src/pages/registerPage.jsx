@@ -1,18 +1,30 @@
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import styles from "../CSSModules/registerpage.module.css";
-import AuthForm from "../components/AuthForm";
-import { USE_DEMO_AUTH, handleRegister as handleRegisterDemo } from "../utility/forTesting";
+import AuthForm from "../components/AuthForm.jsx";
+import { USE_DEMO_AUTH, handleRegister as handleRegisterDemo } from "../utility/forTesting"; // Import the demo auth utility
+import { signupUser } from "../utility/userAPI.jsx";
 
 const RegisterPage = () => {
     const { t } = useTranslation();
     const navigate = useNavigate();
 
-    const handleRegister = USE_DEMO_AUTH
+    // USE_DEMO_AUTH is for testing signup, login, and logout functionality without a backend.
+    const handleRegister = USE_DEMO_AUTH // USE_DEMO_AUTH is currently set to false, so this will not use demo auth
         ? (e) => handleRegisterDemo(e, navigate)
-        : (e) => {
+        : async (e) => {
             e.preventDefault();
-            
+            const form = e.target;
+            const username = form.username.value;
+            const email = form.email.value;
+            const password = form.password.value;
+
+            try {
+                await signupUser({ userName: username, email, password });
+                navigate("/login");
+            } catch (err) {
+                alert(err?.response?.data?.error || "Registration failed");
+            }
         };
 
     const fields = [

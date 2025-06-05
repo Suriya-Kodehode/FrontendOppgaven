@@ -1,7 +1,9 @@
-export const USE_DEMO_AUTH = true; // Set to false to disable demo logic
+import { setItem, getItem, removeItem } from "./localStorage.jsx";
+
+export const USE_DEMO_AUTH = false; // Set to false to disable demo logic or true to enable it.
 
 export function isAuthenticated() {
-    return !!localStorage.getItem("isLoggedIn");
+    return !!getItem("isLoggedIn");
 }
 
 export const handleRegister = (e, navigate) => {
@@ -15,8 +17,7 @@ export const handleRegister = (e, navigate) => {
     const email = form.email.value;
     const password = form.password.value;
 
-    localStorage.setItem("registeredUser", JSON.stringify({ username, email, password }));
-
+    setItem("registeredUser", { username, email, password });
     navigate("/login");
 };
 
@@ -30,9 +31,9 @@ export const handleLogin = (e, navigate) => {
     const username = form.username.value;
     const password = form.password.value;
 
-    const stored = JSON.parse(localStorage.getItem("registeredUser") || "{}");
+    const stored = getItem("registeredUser") || {};
     if (username === stored.username && password === stored.password) {
-        localStorage.setItem("isLoggedIn", "true");
+        setItem("isLoggedIn", true);
         navigate("/home");
     } else {
         alert("Invalid username or password");
@@ -41,6 +42,6 @@ export const handleLogin = (e, navigate) => {
 
 // Clears demo auth data from localStorage
 export const clearDemoAuth = () => {
-    localStorage.removeItem("registeredUser");
-    localStorage.removeItem("isLoggedIn");
+    removeItem("registeredUser");
+    removeItem("isLoggedIn");
 };
