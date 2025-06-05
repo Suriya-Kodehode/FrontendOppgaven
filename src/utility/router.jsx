@@ -1,7 +1,7 @@
 import { createBrowserRouter, RouterProvider, Navigate } from "react-router-dom";
 import { useEffect } from "react";
 import { base_url as base } from "../../config.js";
-import AuthRoute from "./authRoute.jsx";
+import { PrivateRoute } from "./authRoute.jsx";
 
 import App from "../App.jsx";
 import Home from "../pages/homePage.jsx";
@@ -31,9 +31,9 @@ const router = createBrowserRouter(
         { 
             path: "home",     
             element: (
-                <AuthRoute>
+                <PrivateRoute>
                     <Home />
-                </AuthRoute>
+                </PrivateRoute>
             )
         },
       ]
@@ -65,7 +65,6 @@ const AppRouter = () => (
         <BaseInjector base={base} />
         <RouterProvider router={router} />
     </>
-  
 );
 
 export default AppRouter;

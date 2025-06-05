@@ -8,8 +8,7 @@ export function isAuthenticated() {
     return (USE_DEMO_AUTH && !!getItem("isLoggedIn")) || !!getItem("jwtToken");
 }
 
-const PrivateRoute = ({ children }) => {
+// PrivateRoute component to protect routes
+export const PrivateRoute = ({ children }) => {
     return isAuthenticated() ? children : <Navigate to="/login" replace />;
 };
-
-export default PrivateRoute;

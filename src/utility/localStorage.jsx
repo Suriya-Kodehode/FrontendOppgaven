@@ -22,5 +22,3 @@ export const removeItem = (key) => {
 export const clearAll = () => {
     localStorage.clear();
 };
-
-export const isAuthenticated = () => !!getItem("jwtToken");
