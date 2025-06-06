@@ -1,11 +1,14 @@
 <!-- -------------------- -->
+
 To install all necessary dependencies: 
 Run the following commands:
 
 npm i
 npm install axios i18next react react-dom react-i18next react-router-dom
+
 <!-- -------------------- -->
 <!-- -------------------- -->
+
 To fetch data from the backend API: 
 Create a .env file and define the API URL:
 
@@ -13,4 +16,5 @@ VITE_API_URL=
 
 example:
 VITE_API_URL=http://localhost:3000/api/users
+
 <!-- -------------------- -->
