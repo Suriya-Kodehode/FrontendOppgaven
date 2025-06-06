@@ -3,7 +3,7 @@
 To install all necessary dependencies: 
 Run the following commands:
 
-npm i
+npm install
 npm install axios i18next react react-dom react-i18next react-router-dom
 
 <!-- -------------------- -->
